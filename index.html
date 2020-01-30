@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Code Quiz</title>
+</head>
+
+<body>
+
+  <button id="start">start</button>
+  <div id="Quiz">Question</div>
+  <div id="result"></div>
+  <div id="timer"></div>
+
+  <script>
+    let timer = 300
+    let score = 0
+    let quizDiv = document.getElementById("Quiz")
+    let startBtn = document.getElementById("start")
+    let quiz = [
+      {
+        question: "where am i from?",
+        choices: ["Pasadena", "Irvine", "Costa Mesa", "Fullerton"],
+        answer: "Irvine"
+      },
+      {
+        question: "what is my fav food",
+        choices: ["apple", "sushi", "curry"],
+        answer: "apple"
+      }
+
+    ]
+      startBtn.addEventListener("click", createQuiz())
+    function createQuiz() {
+      for(var i = 0; i < quiz.length;i++){
+        var quizQuestionHouse;
+        var title = document.createElement("h1")
+        title.append(quiz[i].question)
+        quizQuestionHouse.append(title)
+        for (let j = 0; j < quiz[j].choices.length; j++) {
+          var button = document.createElement("button")
+          button.append(quiz[i].choices[j])
+          button.setAttribute("class", "choiceBtn")
+          button.setAttribute("name", quiz[i].choices[j])
+          button.setAttribute("value", i)
+          button.addEventListener("click", handleClick(event))
+          quizQuestionHouse.append(button)
+        }
+        quizDiv.append(quizQuestionHouse)
+      }
+    }
+    function handleClick(event) {
+      event.preventDefault();
+      let index = event.target.value 
+      if(event.target.name === quiz[index].answer){
+        score++
+      }
+      else {
+        timer -= 10
+      }
+    }
+    
+
+    // document.getElementById('start').addEventListener('click').text
+    const timerCount = setInterval(function () { timer--; }, 1000);
+
+    if(timer === 0) {
+      console.log('Time Out')
+      timer = 300
+    }
+
+
+
+
+  // let string = "hello"
+  // let integer = 10000000
+  // let boolean = true
+
+
+  //   if(name){
+  //     console.log("hello")
+  //   }
+  //  let quizElem = document.getElementById("Quiz")
+  //  quizElem.textContent("hello")
+  //  let buttonElem = document.getElementById("start")
+
+  //  buttonElem.addEventListener("click", function() {
+  //    console.log("hey whats up")
+  //  })
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>
